@@ -1,0 +1,57 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <center>
+        <h2> Welcome To Wiki </h2>
+        <h5>The free encyclopedia that anyone can edit </h5>
+
+    </center>
+    <h1>All Pages</h1>
+    <form>
+        <a href="{%url 'smart_search' 'a'%}">A</a> <a href="{%url 'smart_search' 'b'%}">B</a> <a href="{%url 'smart_search' 'c'%}">C</a> 
+        <a href="{%url 'smart_search' 'd'%}">D</a> <a href="{%url 'smart_search' 'e'%}">E</a> <a href="{%url 'smart_search' 'f'%}">F</a> 
+        <a href="{%url 'smart_search' 'g'%}">G</a> <a href="{%url 'smart_search' 'h' %}">H</a> <a href="{%url 'smart_search' 'i'%}">I</a>
+         <a href="{%url 'smart_search' 'j'%}">J</a> <a href="{%url 'smart_search' 'k'%}">K</a> <a href="{%url 'smart_search' 'l'%}">L</a>
+          <a href="{%url 'smart_search' 'm'%}">M</a>
+        <a href="{%url 'smart_search' 'n'%}">N</a> <a href="{%url 'smart_search' 'o'%}">O</a> <a href="{%url 'smart_search' 'p'%}">P</a> 
+        <a href="{%url 'smart_search' 'q'%}">Q</a>
+        <a href="{%url 'smart_search' 'r'%}">R</a> <a href="{%url 'smart_search' 's'%}">S</a>
+         <a href="{%url 'smart_search' 't'%}">T</a> <a href="{%url 'smart_search' 'u'%}">U</a>
+          <a href="{%url 'smart_search' 'v'%}">V</a> <a href="{%url 'smart_search' 'w'%}">W</a> <a href="{%url 'smart_search' 'x'%}">X</a>
+           <a href="{%url 'smart_search' 'y'%}">Y</a> <a href="{%url 'smart_search' 'z'%}">Z</a>
+    </form>
+
+    <ul>
+        {% for entry in entries %}
+        <li>
+            <a href="{% url 'title' entry %}" style="display:block ; margin: 20px 0 10px;font-size: 22px;">{{ entry }} </a>
+
+            <form method="post" action="{% url 'delete' entry %}" style="display:inline-block;">
+                {% csrf_token %}
+    
+                <button type="submit" style="font-size: 12px; background-color:lightpink;"> Delete</button>
+ 
+
+            </form> 
+            <form method="get" action="{% url 'edit' entry %}" style="display: inline-block;">
+                {% csrf_token %}
+
+                <button type="submit" style="font-size: 12px; background-color: aquamarine;"> edit</button>
+            </form>
+
+        </li>
+        {% endfor %}
+    </ul>
+        {{res}}
+        {% for name in show %}
+            <li>
+                <a href="{% url 'title' name%}">{{name}}</ul>
+            </li>
+        {% endfor %}
+    
+
+{% endblock %}
